@@ -9,9 +9,8 @@ module.exports = {
             .then((ueggPcpaMiembroComision) => res.status(200).send(ueggPcpaMiembroComision)) 
             .catch((error) => { res.status(400).send(error); });
     },
-
-
-    async listMiembrosComision(req, res) {
+    // Metodo anteriori que lista todos los miembros de comision sin agruparlos
+    /* async listMiembrosComision(req, res) {
       console.log('req', req.params);
    
       return sequelize.query(`select  upue.id as id_pcpa_unidad_educativa,  upue.cod_sie,upue.desc_ue, upue.desc_municipio , 
@@ -30,10 +29,96 @@ module.exports = {
         })
           .then((subcentros) => res.status(200).send(subcentros))
           .catch((error) => { res.status(400).send(error); });
+    }, */
+    // Nuevo metodo que agrupa los nombres de los miembros por tipo de comision y tipo de miembro
+    /* async listMiembrosComision(req, res) {
+        console.log('req', req.params);
+
+        return sequelize.query(`
+            SELECT 
+                upue.id AS id_pcpa_unidad_educativa,
+                upue.cod_sie,
+                upue.desc_ue,
+                upue.desc_municipio,
+                upue.desc_nivel,
+                upue.modalidad,
+                upue.nombres_director || '-' || upue.apellidos_director AS nombres_director,
+                upcon.id AS id_construccion,
+                upcon.fecha_registro,
+                upcon.check_diagnostico_pcpa,
+                upcon.fecha_aprobacion,
+                upcon.vigencia_aprobacion,
+                upct.id AS id_comision_tipo,
+                upct.desc_comision_tipo,
+                upmt.id AS id_miembro_tipo,
+                upmt.desc_miembro_tipo,
+                STRING_AGG(upmc.nombres_miembro, ', ') AS nombres_miembros
+            FROM uegg_pcpa_construccion upcon
+            JOIN uegg_pcpa_unidad_educativa upue ON upcon.id_pcpa_unidad_educativa = upue.id
+            JOIN uegg_pcpa_miembro_comision upmc ON upmc.id_pcpa_construccion = upcon.id
+            JOIN uegg_pcpa_miembro_tipo upmt ON upmt.id = upmc.id_pcpa_miembro_tipo
+            JOIN uegg_pcpa_comision_tipo upct ON upct.id = upmc.id_pcpa_comision_tipo
+            WHERE upue.cod_ue = ${req.params.id} 
+              AND upue.estado = 'ACTIVO' 
+              AND upmc.estado = 'ACTIVO'
+            GROUP BY 
+                upue.id, upue.cod_sie, upue.desc_ue, upue.desc_municipio, 
+                upue.desc_nivel, upue.modalidad, upue.nombres_director, upue.apellidos_director,
+                upcon.id, upcon.fecha_registro, upcon.check_diagnostico_pcpa, 
+                upcon.fecha_aprobacion, upcon.vigencia_aprobacion,
+                upct.id, upct.desc_comision_tipo,
+                upmt.id, upmt.desc_miembro_tipo
+            ORDER BY id_comision_tipo ASC, id_miembro_tipo ASC
+        `, {
+            type: sequelize.QueryTypes.SELECT
+        })
+        .then((subcentros) => res.status(200).send(subcentros))
+        .catch((error) => { res.status(400).send(error); });
+    }, */
+    async listMiembrosComision(req, res) {
+        console.log('req', req.params);
+
+        return sequelize.query(`
+            SELECT 
+                upue.id AS id_pcpa_unidad_educativa,
+                upue.cod_sie,
+                upue.desc_ue,
+                upue.desc_municipio,
+                upue.desc_nivel,
+                upue.modalidad,
+                upue.nombres_director || '-' || upue.apellidos_director AS nombres_director,
+                upcon.id AS id,
+                upcon.fecha_registro,
+                upcon.check_diagnostico_pcpa,
+                upcon.fecha_aprobacion,
+                upcon.vigencia_aprobacion,
+                upct.id AS id_comision_tipo,
+                upct.desc_comision_tipo,
+                upmt.id AS id_miembro_tipo,
+                upmt.desc_miembro_tipo,
+                STRING_AGG(upmc.nombres_miembro, ', ') AS nombres_miembro
+            FROM uegg_pcpa_construccion upcon
+            JOIN uegg_pcpa_unidad_educativa upue ON upcon.id_pcpa_unidad_educativa = upue.id
+            JOIN uegg_pcpa_miembro_comision upmc ON upmc.id_pcpa_construccion = upcon.id
+            JOIN uegg_pcpa_miembro_tipo upmt ON upmt.id = upmc.id_pcpa_miembro_tipo
+            JOIN uegg_pcpa_comision_tipo upct ON upct.id = upmc.id_pcpa_comision_tipo
+            WHERE upue.cod_ue = ${req.params.id} 
+              AND upue.estado = 'ACTIVO' 
+              AND upmc.estado = 'ACTIVO'
+            GROUP BY 
+                upue.id, upue.cod_sie, upue.desc_ue, upue.desc_municipio, 
+                upue.desc_nivel, upue.modalidad, upue.nombres_director, upue.apellidos_director,
+                upcon.id, upcon.fecha_registro, upcon.check_diagnostico_pcpa, 
+                upcon.fecha_aprobacion, upcon.vigencia_aprobacion,
+                upct.id, upct.desc_comision_tipo,
+                upmt.id, upmt.desc_miembro_tipo
+            ORDER BY id_comision_tipo ASC, id_miembro_tipo ASC
+        `, {
+            type: sequelize.QueryTypes.SELECT
+        })
+        .then((subcentros) => res.status(200).send(subcentros))
+        .catch((error) => { res.status(400).send(error); });
     },
-
-
-
     getById(req, res) {
         console.log(req.params.id); 
         return UeggPcpaMiembroComision
@@ -49,8 +134,8 @@ module.exports = {
             })
             .catch((error) => res.status(400).send(error));
     },
-
-    add(req, res) {
+    // Nuevo metodo para insertar varios miembros de comision a la vez, los nombres vienen en un solo campo separados por coma
+    /* add(req, res) {
         return UeggPcpaMiembroComision.create({
             id_pcpa_construccion: req.body.id_pcpa_construccion,
             id_pcpa_comision_tipo: req.body.id_pcpa_comision_tipo,
@@ -67,7 +152,41 @@ module.exports = {
         })
           .then(ueggPcpaMiembroComision => res.status(201).send(ueggPcpaMiembroComision))
           .catch(error => res.status(400).send(error));
-      },
+    }, */
+    // Nuevo metodo para insertar varios miembros de comision a la vez, los nombres vienen en un solo campo separados por coma
+    add(req, res) {
+        try {
+            // Tomamos los nombres y los separamos por coma, eliminando espacios extra
+            const nombresArray = req.body.nombres_miembro
+                .split(',')
+                .map(nombre => nombre.trim())
+                .filter(nombre => nombre.length > 0); // eliminamos elementos vacíos
+
+            // Preparamos las promesas para insertar cada registro
+            const promesas = nombresArray.map(nombre => {
+                return UeggPcpaMiembroComision.create({
+                    id_pcpa_construccion: req.body.id_pcpa_construccion,
+                    id_pcpa_comision_tipo: req.body.id_pcpa_comision_tipo,
+                    id_pcpa_miembro_tipo: req.body.id_pcpa_miembro_tipo,
+                    orden: req.body.orden,
+                    nombres_miembro: nombre,
+                    apellidos_miembro: req.body.apellidos_miembro,
+                    check_miembro_comision: req.body.check_miembro_comision,
+                    estado: 'ACTIVO',
+                    usu_cre: req.body.usu_cre,
+                    fec_cre: req.body.fec_cre
+                });
+            });
+
+            // Ejecutamos todas las inserciones en paralelo
+            Promise.all(promesas)
+                .then(resultados => res.status(201).send(resultados))
+                .catch(error => res.status(400).send(error));
+
+        } catch (error) {
+            res.status(400).send(error);
+        }
+    },
     
     update(req, res) {
         console.log(UeggPcpaMiembroComision);
