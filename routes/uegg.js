@@ -373,8 +373,8 @@ router.delete('/ueggViolenciaSegInfraccion/:id',            ueggViolenciaSegInfr
 router.delete('/ueggViolenciaSegSanciones/:id',             ueggViolenciaSegSancionesController.delete);                                                                        
 router.delete('/ueggViolenciaSegSancionesDel/:id',          ueggViolenciaSegSancionesDelController.delete);                                                                        
 router.delete('/ueggViolenciaVictima/:id',                  ueggViolenciaVictimaController.delete);                                                                        
-
-
+//conteo de PCPA aprobados true
+router.get('/ueggPcpaConstruccion/count/true',              ueggPcpaConstruccionController.countDiagnosticoTrue);
 
 module.exports = router;
 

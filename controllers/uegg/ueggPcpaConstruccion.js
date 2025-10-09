@@ -142,6 +142,21 @@ module.exports = {
           .then((subcentros) => res.status(200).send(subcentros))
           .catch((error) => { res.status(400).send(error); });
     },
+    /// conteo de PCPA aprobados true
+    async countDiagnosticoTrue(req, res) {
+      try {
+        const [result] = await sequelize.query(`
+          SELECT COUNT(*) AS total_true
+          FROM public.uegg_pcpa_construccion
+          WHERE estado = 'ACTIVO' 
+            AND check_diagnostico_pcpa = true
+        `, { type: sequelize.QueryTypes.SELECT });
+
+        res.status(200).send(result);
+      } catch (error) {
+        res.status(400).send(error);
+      }
+    },
     
 
 };

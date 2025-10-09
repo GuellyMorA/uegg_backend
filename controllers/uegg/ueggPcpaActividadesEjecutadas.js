@@ -144,7 +144,7 @@ module.exports = {
             .catch(error => {
               console.log(' *************ERROR INACTIVADO 2',  error);
               res.status(400).send(error)  });
-      },   
+      },
 
 
 };
