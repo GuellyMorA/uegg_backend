@@ -156,8 +156,42 @@ module.exports = {
             .catch(error => {
               console.log(' *************ERROR INACTIVADO 2',  error);
               res.status(400).send(error)  });
-      },   
+      },
+      //Actividades de promoción
+      /* async countActividadesPormocion(req, res) {
+        try {
+          const total = await UeggPcpaActividadesPromocion.count({
+            where: { estado: 'ACTIVO' }
+          });
 
+          res.status(200).send({ actividades_promocion_total: total });
+        } catch (error) {
+          res.status(400).send(error);
+        }
+      } */
+      /* async countActividadesPormocion(req, res) {
+        try {
+          const [result] = await sequelize.query(`
+            SELECT COUNT(*) AS actividades_promocion_total
+            FROM public.uegg_pcpa_actividades_promocion
+            WHERE estado = 'ACTIVO'
+          `, { type: sequelize.QueryTypes.SELECT });
+
+          res.status(200).send(result);
+        } catch (error) {
+          res.status(400).send(error);
+        }
+      } */
+    /* async countActividadesPormocion(req, res) {
+      try {
+        res.status(200).json({
+          mensaje: 'Ruta funcionando correctamente',
+          ok: true
+        });
+      } catch (error) {
+        res.status(500).json({ mensaje: 'Error en la ruta de prueba', error });
+      }
+    }, */
 
 
 };

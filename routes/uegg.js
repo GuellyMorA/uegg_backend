@@ -78,10 +78,7 @@ const ueggViolenciaSegInfraccionController    =  require('../controllers/uegg/ue
 const ueggViolenciaSegSancionesController    =  require('../controllers/uegg/ueggViolenciaSegSanciones');
 const ueggViolenciaSegSancionesDelController    =  require('../controllers/uegg/ueggViolenciaSegSancionesDel');
 const ueggViolenciaVictimaController    =  require('../controllers/uegg/ueggViolenciaVictima');
-
-
-
-
+const dashboardController    =  require('../controllers/dashboardController');
 
 router.get('/', function (req, res, next) {
     // res.send('respond with a resource');
@@ -374,7 +371,11 @@ router.delete('/ueggViolenciaSegSanciones/:id',             ueggViolenciaSegSanc
 router.delete('/ueggViolenciaSegSancionesDel/:id',          ueggViolenciaSegSancionesDelController.delete);                                                                        
 router.delete('/ueggViolenciaVictima/:id',                  ueggViolenciaVictimaController.delete);                                                                        
 //conteo de PCPA aprobados true y false
-router.get('/ueggPcpaConstruccion/count/true',              ueggPcpaConstruccionController.countDiagnosticoTrueFalse);
+//router.get('/ueggPcpaConstruccion/count/true',              ueggPcpaConstruccionController.countDiagnosticoTrueFalse);
+//Actividades de promoción
+//router.get('/actividadesPromocion', ueggPcpaActividadesPromocionController.countActividadesPormocion);
+//rura general de dasboard
+router.get('/convivienciaPacificaArmonicaDashboardCounts', dashboardController.dashboardCounts);
 
 module.exports = router;
 

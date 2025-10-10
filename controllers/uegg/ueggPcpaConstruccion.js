@@ -157,7 +157,7 @@ module.exports = {
         res.status(400).send(error);
       }
     }, */
-    async countDiagnosticoTrueFalse(req, res) {
+    /* async countDiagnosticoTrueFalse(req, res) {
       try {
         const [result] = await sequelize.query(`
           SELECT 
@@ -171,7 +171,7 @@ module.exports = {
       } catch (error) {
         res.status(400).send(error);
       }
-    },
+    }, */
     
 
 };
