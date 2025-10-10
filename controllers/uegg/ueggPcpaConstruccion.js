@@ -143,13 +143,28 @@ module.exports = {
           .catch((error) => { res.status(400).send(error); });
     },
     /// conteo de PCPA aprobados true
-    async countDiagnosticoTrue(req, res) {
+    /* async countDiagnosticoTrue(req, res) {
       try {
         const [result] = await sequelize.query(`
           SELECT COUNT(*) AS total_true
           FROM public.uegg_pcpa_construccion
           WHERE estado = 'ACTIVO' 
             AND check_diagnostico_pcpa = true
+        `, { type: sequelize.QueryTypes.SELECT });
+
+        res.status(200).send(result);
+      } catch (error) {
+        res.status(400).send(error);
+      }
+    }, */
+    async countDiagnosticoTrueFalse(req, res) {
+      try {
+        const [result] = await sequelize.query(`
+          SELECT 
+            COUNT(*) FILTER (WHERE check_diagnostico_pcpa = true) AS total_true,
+            COUNT(*) FILTER (WHERE check_diagnostico_pcpa = false) AS total_false
+          FROM public.uegg_pcpa_construccion
+          WHERE estado = 'ACTIVO'
         `, { type: sequelize.QueryTypes.SELECT });
 
         res.status(200).send(result);
