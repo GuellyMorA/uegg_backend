@@ -19,7 +19,18 @@ var usersRouter = require('./routes/users');
 var ueggRouter = require('./routes/uegg');
 
 var app = express();
-app.use(cors());
+
+// Opción 1: CORS simple (desarrollo)
+//app.use(cors());
+
+// Opción 2: CORS configurado (producción recomendada)
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://localhost:3000', 'http://localhost:3001'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  maxAge: 86400 // 24 horas de cache para preflight
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
