@@ -6,7 +6,7 @@
 
 // 2. Modificación a socialización e implementación 	
 	
-//  module.exports = (sequelize, DataTypes) => {  const   Persona = sequelize.define('pcpa_unidad_eductiva (	
+//  module.exports = (sequelize, DataTypes) => {  const   Persona = sequelize.define('pcpa_unidad_educativa (	
 //  module.exports = (sequelize, DataTypes) => {  const   Persona = sequelize.define('pcpa_module.exports = (sequelize, DataTypes) => {  const  ruccion (	
 //  module.exports = (sequelize, DataTypes) => {  const   Persona = sequelize.define('pcpa_actividades_tipo (	
 	

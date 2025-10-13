@@ -14,7 +14,7 @@ const upload = multer({
 });
 
 /*
-const ueggPcpaUnidadEducativaController      =  require('../controllers/uegg/ueggPcpaUnidadEducativa');
+
 const UeggPcpaConstruccionController        =  require('../controllers/uegg/ueggPcpaConstruccion');
 const UeggPcpaComisionTipoController        =  require('../controllers/uegg/ueggPcpaComisionTipo');
 const UeggViolenciaDnaController            =  require('../controllers/uegg/ueggViolenciaDna');
@@ -93,12 +93,6 @@ router.get('/', function (req, res, next) {
 /*
 router.get('/ueggPcpaConstruccion'          , UeggPcpaConstruccionController.list);
 router.get('/ueggPcpaComisionTipo'          , UeggPcpaComisionTipoController.list);
-
-router.get('/ueggPcpaUnidadEducativa'        , ueggPcpaUnidadEducativaController.list);
-router.get('/ueggPcpaUnidadEducativa/:id'    , ueggPcpaUnidadEducativaController.getById);
-router.post('/ueggPcpaUnidadEducativa'       , ueggPcpaUnidadEducativaController.add);
-router.put('/ueggPcpaUnidadEducativa/:Id'    , ueggPcpaUnidadEducativaController.update);
-router.delete('/ueggPcpaUnidadEducativa/:Id' , ueggPcpaUnidadEducativaController.delete);
 
 router.get('/ueggViolenciaDna'              , UeggViolenciaDnaController.list);
 router.get('/ueggViolenciaAccionesTipo'     , UeggViolenciaAccionesTipoController.list);
@@ -238,7 +232,10 @@ router.get('/ueggPcpaMiembroComisionList/:id',       ueggPcpaMiembroComisionCont
 
 router.get('/ueggPcpaMiembroTipo/:id',                   ueggPcpaMiembroTipoController.getById);                                                                        
 router.get('/ueggPcpaReporteEmbarazoTipo/:id',           ueggPcpaReporteEmbarazoTipoController.getById);                                                                        
-router.get('/ueggPcpaUnidadEducativa/:id',                ueggPcpaUnidadEducativaController.getById);                                                                        
+router.get('/ueggPcpaUnidadEducativa/:id',               ueggPcpaUnidadEducativaController.getById);                                                                        
+router.get('/ueggPcpaUnidadEducativa/codSie/:codSie',    ueggPcpaUnidadEducativaController.getByCodSie);  
+router.get('/ueggPcpaUnidadEducativa/ci/:ci/codSie/:codSie',    ueggPcpaUnidadEducativaController.getByCiAndCodSie); 
+
 router.get('/ueggViolenciaAccionesTipo/:id',             ueggViolenciaAccionesTipoController.getById);                                                                        
 router.get('/ueggViolenciaAgresor/:id',                  ueggViolenciaAgresorController.getById);                                                                        
 router.get('/ueggViolenciaAutoFinalTipo/:id',            ueggViolenciaAutoFinalTipoController.getById);                                                                        

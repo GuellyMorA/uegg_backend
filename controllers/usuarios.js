@@ -87,8 +87,11 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  auth(req, res) {console.log(req.body);
+  auth(req, res) {
+    console.log(req.body);
+
     let cambio_clave = req.body.username == req.body.password ? true : false;
+
     Usuario.findOne({ where: { username: req.body.username, esactivo: true } })
       .then(async usuario => {
         if (md5(req.body.password) === usuario.password) {
@@ -112,6 +115,7 @@ module.exports = {
           let persona = await Persona.findOne({
             where: { id: usuario.persona_id }
           });
+
           let queryAuth = "";
           if (req.body.sistema == "INFRA") {
             let gestion_actual = 2019; //new Date().getFullYear();
@@ -122,18 +126,21 @@ module.exports = {
               usuario.persona_id +
               " limit 1";
           } else {
+            // rbc 2025 cambiar estas tablas
             queryAuth ='select ie.id, ie.le_juridicciongeografica_id from institucioneducativa ie inner join maestro_inscripcion mi on mi.institucioneducativa_id = ie.id where mi.persona_id='+usuario.persona_id+' limit 1';
-          }console.log(queryAuth);
+          }
+          console.log('queryAuth: ', queryAuth);
+
           let sie_jg = await sequelize.query(queryAuth, {
             type: sequelize.QueryTypes.SELECT,
             plain: true,
             raw: true
-          });console.log(sie_jg);
+          });          
+          console.log(sie_jg);
+
           res.status(200).json({
             usuario_id: usuario.id,
-            nombre: persona
-              ? persona.nombre + " " + persona.paterno + " " + persona.materno
-              : "",
+            nombre: persona ? persona.nombre + " " + persona.paterno + " " + persona.materno    : "",
             codigo_sie: sie_jg ? sie_jg.id : "",
             codigo_jg: sie_jg ? sie_jg.le_juridicciongeografica_id : "",
             rol_lugar: usuario_rol_lugar,

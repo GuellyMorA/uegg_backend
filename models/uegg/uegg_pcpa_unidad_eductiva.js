@@ -6,7 +6,7 @@
 // 1. Registro de PCPA
 
  module.exports = (sequelize, DataTypes) => {  
- const   UeggPcpaUnidadEductiva = sequelize.define('uegg_pcpa_unidad_eductiva', {
+ const   UeggPcpaUnidadEducativa = sequelize.define('uegg_pcpa_unidad_educativa', {
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -38,9 +38,9 @@
   }, {       
       tableName: 'uegg_pcpa_unidad_educativa',       
       timestamps: false,     });   
-      UeggPcpaUnidadEductiva.associate = function(models) {      
+      UeggPcpaUnidadEducativa.associate = function(models) {      
   
   };     
-      return UeggPcpaUnidadEductiva; };
+      return UeggPcpaUnidadEducativa; };
 
 
