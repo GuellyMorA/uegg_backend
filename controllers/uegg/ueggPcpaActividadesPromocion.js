@@ -56,6 +56,7 @@ module.exports = {
     },
 
     add(req, res) {
+          console.log(UeggPcpaActividadesPromocion);
         return UeggPcpaActividadesPromocion.create({
             id_pcpa_construccion: req.body.id_pcpa_construccion,
             id_pcpa_actividades_tipo: req.body.id_pcpa_actividades_tipo,
