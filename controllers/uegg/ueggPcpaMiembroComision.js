@@ -1,5 +1,6 @@
 const UeggPcpaMiembroComision = require('../../models/uegg').uegg_pcpa_miembro_comision ; 
 const sequelize = UeggPcpaMiembroComision.sequelize;
+const { Op } = require('sequelize'); // 👈 Importa operadores de Sequelize
 
 module.exports = {   
                                                                                                                                                                                                                                                                                                                                                                                                                             
@@ -60,7 +61,7 @@ module.exports = {
             apellidos_miembro: req.body.apellidos_miembro,
             check_miembro_comision: req.body.check_miembro_comision,
                       
-            estado: 'ACTIVO' ,
+            estado: req.body.estado,
             usu_cre: req.body.usu_cre ,
             fec_cre: req.body.fec_cre 
           
@@ -71,7 +72,7 @@ module.exports = {
     
     update(req, res) {
         console.log(UeggPcpaMiembroComision);
-        return UeggPcpaMiembroComision.findByPk(req.params.Id, {})
+        return UeggPcpaMiembroComision.findByPk(req.params.id, {})
           .then(ueggPcpaMiembroComision => {
             if (!ueggPcpaMiembroComision) {
               return res.status(404).send({
@@ -88,8 +89,8 @@ module.exports = {
                 apellidos_miembro: req.body.apellidos_miembro || ueggPcpaMiembroComision.apellidos_miembro,
                 check_miembro_comision: req.body.check_miembro_comision || ueggPcpaMiembroComision.check_miembro_comision,
                 
-                estado: 'MODIFICADO',  
-                usu_mod: 'ADMIN', //req.body.usu_mod ,
+                 estado: req.body.estado || ueggPcpaMiembroComision.estado,
+                 usu_mod: req.body.usu_cre ,
                 fec_mod:  new Date() //req.body.fec_mod
               })
               .then(() =>{  

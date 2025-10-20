@@ -30,7 +30,7 @@ module.exports = {
         cod_comision_tipo: req.body.cod_comision_tipo   ,
         desc_comision_tipo: req.body.desc_comision_tipo   ,    
      
-        estado: 'ACTIVO' ,
+        estado: req.body.estado ,
         usu_cre: req.body.usu_cre ,
         fec_cre: req.body.fec_cre 
       
@@ -53,8 +53,8 @@ update(req, res) {
             cod_comision_tipo: req.body.cod_comision_tipo ||  ueggPcpaComisionTipo.cod_comision_tipo  ,
             desc_comision_tipo: req.body.desc_comision_tipo  ||  ueggPcpaComisionTipo.desc_comision_tipo  ,
   
-            estado: 'MODIFICADO',  
-            usu_mod: req.body.usu_mod ,
+                estado: req.body.estado || ueggPcpaComisionTipo.estado,
+                usu_mod: req.body.usu_cre ,
             fec_mod: req.body.fec_mod
           })
           .then(() =>{  

@@ -1,12 +1,20 @@
 const ueggPcpaUnidadEducativa = require('../../models/uegg').uegg_pcpa_unidad_educativa ; 
+const { Op } = require('sequelize'); // 👈 Importa operadores de Sequelize
 
 module.exports = {
-    list(req, res) {
-        return ueggPcpaUnidadEducativa
-            .findAll({})
-            .then((ueggPcpaUnidadEducativa) => res.status(200).send(ueggPcpaUnidadEducativa)) 
-            .catch((error) => { res.status(400).send(error); });
-    },
+list(req, res) {
+  return ueggPcpaUnidadEducativa
+    .findAll({})
+    .then((resultado) => {
+      console.log('Lista de unidades educativas:', resultado); // 👈 imprime el resultado
+      res.status(200).send(resultado);
+    })
+    .catch((error) => {
+      console.error('Error al listar unidades educativas:', error); // 👈 imprime el error si ocurre
+      res.status(400).send(error);
+    });
+},
+
 
     getById(req, res) {
         console.log(req.params.id);
@@ -25,16 +33,26 @@ module.exports = {
     },
 
     getByCiAndCodSie(req, res) {
-       console.log(req.params.ci);  // nota.- username =ci
+       console.log('req.params.ci; ' ,req.params.ci);  // nota.- username =ci
       return ueggPcpaUnidadEducativa.findAll({
                 limit: 10,
              attributes: ['id','usu_cre', 'cod_sie','nombres_director','desc_departamento','estado'],
                 where: {
-                    usu_cre: req.params.ci,  cod_sie: req.params.codSie, estado: 'ACTIVO'
+                    usu_cre: req.params.ci,  cod_sie: req.params.codSie,
+                     estado: {
+                                 [Op.in]: ['ACTIVO', 'MODIFICADO'] // 👈 equivalente a "estado IN ('ACTIVO', 'MODIFICADO')"
+                              }
                 },
             })
-            .then(institucioneducativa => res.status(200).send(institucioneducativa))
-            .catch(error => res.status(400).send(error));
+          .then(ueggPcpaUnidadEducativa => {
+              console.log('Resultado de la consulta:', ueggPcpaUnidadEducativa); // 👈 imprime el resultado
+              res.status(200).send(ueggPcpaUnidadEducativa);
+          })
+          .catch(error => {
+              console.error('Error al obtener datos:', error); // 👈 imprime el error si ocurre
+              res.status(400).send(error);
+          });
+
     },
             
     getByCodSie(req, res) {
@@ -78,8 +96,8 @@ module.exports = {
       },
     
       update(req, res) {
-        console.log(ueggPcpaUnidadEducativa);
-        return ueggPcpaUnidadEducativa.findByPk(req.params.Id, {})
+        console.log(req.params.id);
+        return ueggPcpaUnidadEducativa.findByPk(req.params.id, {})
           .then(ueggPcpaUnidadEducativa => {
             if (!ueggPcpaUnidadEducativa) {
               return res.status(404).send({
@@ -106,8 +124,8 @@ module.exports = {
                 latitud: req.body.latitud || ueggPcpaUnidadEducativa.latitud,
                 longitud: req.body.longitud || ueggPcpaUnidadEducativa.longitud,
                 
-                estado: 'MODIFICADO',  
-                usu_mod: 'ADMIN', //req.body.usu_mod ,
+                estado: req.body.estado || ueggPcpaUnidadEducativa.estado,
+                usu_mod: req.body.usu_cre ,
                 fec_mod:  new Date() //req.body.fec_mod
               })
               .then(() =>{  

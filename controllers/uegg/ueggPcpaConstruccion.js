@@ -1,5 +1,6 @@
 const UeggPcpaConstruccion = require('../../models/uegg').uegg_pcpa_construccion ; 
 const sequelize = UeggPcpaConstruccion.sequelize;
+const { Op } = require('sequelize'); // 👈 Importa operadores de Sequelize
 
 module.exports = {                                                                                                                                                                                                                                                                                                                                                                                                                             
     list(req, res) {
@@ -25,7 +26,29 @@ module.exports = {
             .catch((error) => res.status(400).send(error));
     },
 
-    
+    getByCiAndUe(req, res) {
+       console.log('req.params.idUE; ' ,req.params.idUE);  // nota.- username =ci
+      return UeggPcpaConstruccion.findAll({
+                limit: 10,
+             attributes: ['id','usu_cre', 'id_pcpa_unidad_educativa','vigencia_aprobacion','estado'],
+                where: {
+                    usu_cre: req.params.ci,  id_pcpa_unidad_educativa: req.params.idUE,
+                     estado: {
+                                 [Op.in]: ['ACTIVO', 'MODIFICADO'] // 👈 equivalente a "estado IN ('ACTIVO', 'MODIFICADO')"
+                              }
+                },
+            })
+          .then(ueggPcpaConstruccion => {
+              console.log('Resultado de la consulta:', ueggPcpaConstruccion); // 👈 imprime el resultado
+              res.status(200).send(ueggPcpaConstruccion);
+          })
+          .catch(error => {
+              console.error('Error al obtener datos:', error); // 👈 imprime el error si ocurre
+              res.status(400).send(error);
+          });
+
+    },
+        
     add(req, res) {
         return UeggPcpaConstruccion.create({
             id_pcpa_unidad_educativa: req.body.id_pcpa_unidad_educativa ,
@@ -33,7 +56,7 @@ module.exports = {
             check_diagnostico_pcpa: req.body.check_diagnostico_pcpa ,
             fecha_aprobacion:   new Date(req.body.fecha_aprobacion ), //new Date( req.body.fecha_aprobacion).toString() , // new Date(   dateToString (req.body.fecha_aprobacion,'tz',''))  , //   new Date(  req.body.fecha_aprobacion.toLocaleDateString() )
             vigencia_aprobacion:  req.body.vigencia_aprobacion   ,
-            estado: 'ACTIVO' ,
+            estado: req.body.estado ,
             usu_cre: req.body.usu_cre ,//   new Date('2013-03-10T02:00:00Z').toString()
             fec_cre: req.body.fec_cre  //  new Date().toISOString() 
           
@@ -60,8 +83,8 @@ module.exports = {
                 fecha_registro: req.body.fecha_registro  ||  ueggPcpaConstruccion.fecha_registro  ,
                 check_diagnostico_pcpa: req.body.check_diagnostico_pcpa  ||  ueggPcpaConstruccion.check_diagnostico_pcpa  ,
                 fecha_aprobacion: req.body.fecha_aprobacion  ||  ueggPcpaConstruccion.fecha_aprobacion  ,
-                estado: 'MODIFICADO',  
-                usu_mod: 'ADMIN', //req.body.usu_mod ,
+                 estado: req.body.estado || ueggPcpaConstruccion.estado,
+                usu_mod: req.body.usu_cre ,
                 fec_mod:  new Date() //req.body.fec_mod
               })
               .then(() =>{  

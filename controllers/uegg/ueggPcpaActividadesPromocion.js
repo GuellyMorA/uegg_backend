@@ -76,7 +76,7 @@ module.exports = {
     
       update(req, res) {
         console.log(UeggPcpaActividadesPromocion);
-        return UeggPcpaActividadesPromocion.findByPk(req.params.Id, {})
+        return UeggPcpaActividadesPromocion.findByPk(req.params.id, {})
           .then(ueggPcpaActividadesPromocion => {
             if (!ueggPcpaActividadesPromocion) {
               return res.status(404).send({
@@ -93,9 +93,9 @@ module.exports = {
                 tiempo_vigencia: req.body.tiempo_vigencia || ueggPcpaActividadesPromocion.tiempo_vigencia,
                 declaracion_jurada: req.body.declaracion_jurada || ueggPcpaActividadesPromocion.declaracion_jurada,
 
-                estado: 'MODIFICADO',  
-                usu_mod: req.body.usu_mod ,
-                fec_mod: req.body.fec_mod
+                estado: req.body.estado || ueggPcpaActividadesPromocion.estado,
+                 usu_mod: req.body.usu_cre ,
+                fec_mod:  new Date() 
               })
               .then(() =>{  
                  console.log(' *************SI UPDATE OK');

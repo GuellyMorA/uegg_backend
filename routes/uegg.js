@@ -13,14 +13,6 @@ const upload = multer({
     storage: storage
 });
 
-/*
-
-const UeggPcpaConstruccionController        =  require('../controllers/uegg/ueggPcpaConstruccion');
-const UeggPcpaComisionTipoController        =  require('../controllers/uegg/ueggPcpaComisionTipo');
-const UeggViolenciaDnaController            =  require('../controllers/uegg/ueggViolenciaDna');
-*/
-
-
 
 const ueggEmbEstudianteDerechosController    =  require('../controllers/uegg/ueggEmbEstudianteDerechos');
 const ueggEmbEstudianteDerechosSegController    =  require('../controllers/uegg/ueggEmbEstudianteDerechosSeg');
@@ -90,14 +82,6 @@ router.get('/', function (req, res, next) {
 
 
 
-/*
-router.get('/ueggPcpaConstruccion'          , UeggPcpaConstruccionController.list);
-router.get('/ueggPcpaComisionTipo'          , UeggPcpaComisionTipoController.list);
-
-router.get('/ueggViolenciaDna'              , UeggViolenciaDnaController.list);
-router.get('/ueggViolenciaAccionesTipo'     , UeggViolenciaAccionesTipoController.list);
-*/
-
 
 router.get('/ueggEmbEstudianteDerechos',             ueggEmbEstudianteDerechosController.list);                                                                        
 router.get('/ueggEmbEstudianteDerechosSeg',          ueggEmbEstudianteDerechosSegController.list);                                                                        
@@ -115,8 +99,7 @@ router.get('/ueggPcpaActividadesPromocionList/:id',  ueggPcpaActividadesPromocio
 router.get('/ueggPcpaActividadesTipo',               ueggPcpaActividadesTipoController.list);                                                                        
 router.get('/ueggPcpaActividadesTipoDet',            ueggPcpaActividadesTipoDetController.list);                                                                        
 router.get('/ueggPcpaComisionTipo',                  ueggPcpaComisionTipoController.list);                                                                        
-router.get('/ueggPcpaConstruccion',                  ueggPcpaConstruccionController.list);
-router.get('/ueggPcpaConstruccion/:id',              ueggPcpaConstruccionController.getByUnidadEducativa);                                                                       
+                                                                     
 router.get('/ueggPcpaIndicadoresEjecucion',          ueggPcpaIndicadoresEjecucionController.list);                                                                        
 router.get('/ueggPcpaIndicadoresTipo',               ueggPcpaIndicadoresTipoController.list);    
 
@@ -220,8 +203,13 @@ router.get('/ueggPcpaActividadesEjecutadas/:id',         ueggPcpaActividadesEjec
 router.get('/ueggPcpaActividadesPromocion/:id',          ueggPcpaActividadesPromocionController.getById);                                                                        
 router.get('/ueggPcpaActividadesTipo/:id',               ueggPcpaActividadesTipoController.getById);                                                                        
 router.get('/ueggPcpaActividadesTipoDet/:id',            ueggPcpaActividadesTipoDetController.getById);                                                                        
-router.get('/ueggPcpaComisionTipo/:id',                  ueggPcpaComisionTipoController.getById);                                                                        
-router.get('/ueggPcpaConstruccion/:id',                  ueggPcpaConstruccionController.getById);                                                                        
+router.get('/ueggPcpaComisionTipo/:id',                  ueggPcpaComisionTipoController.getById);   
+
+router.get('/ueggPcpaConstruccion',                      ueggPcpaConstruccionController.list);
+//router.get('/ueggPcpaConstruccion/:id',                  ueggPcpaConstruccionController.getByUnidadEducativa);
+router.get('/ueggPcpaConstruccion/:id',                  ueggPcpaConstruccionController.getById);      
+router.get('/ueggPcpaConstruccion/ci/:ci/idUE/:idUE',    ueggPcpaConstruccionController.getByCiAndUe); 
+
 router.get('/ueggPcpaIndicadoresEjecucion/:id',          ueggPcpaIndicadoresEjecucionController.getById);                                                                        
 router.get('/ueggPcpaIndicadoresTipo/:id',               ueggPcpaIndicadoresTipoController.getById);                                                                        
 router.get('/ueggPcpaMiembroComision/:id',               ueggPcpaMiembroComisionController.getById);    
