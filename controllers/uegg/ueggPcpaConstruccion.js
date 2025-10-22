@@ -70,7 +70,7 @@ module.exports = {
 
     update(req, res) {
         console.log(UeggPcpaConstruccion);
-        return UeggPcpaConstruccion.findByPk(req.params.Id, {})
+        return UeggPcpaConstruccion.findByPk(req.params.id, {})
           .then(ueggPcpaConstruccion => {
             if (!ueggPcpaConstruccion) {
               return res.status(404).send({
@@ -154,12 +154,12 @@ module.exports = {
       },
 
     async getByUnidadEducativa(req, res) {
-      console.log('req', req.params);
+      console.log('req: ', req.params);
       return sequelize.query(`select upcon.id,  upue.cod_sie,upue.desc_ue, upue.desc_municipio , 
       upue.desc_municipio  , upue.desc_nivel , upue.modalidad  , upue.nombres_director ||'-'|| upue.apellidos_director as nombres_director
         from uegg_pcpa_construccion upcon 
           join uegg_pcpa_unidad_educativa upue   on upcon.id_pcpa_unidad_educativa = upue.id    
-        WHERE upue.cod_ue = ${req.params.id} `, {
+        WHERE upue.id = ${req.params.id} `, {
           type: sequelize.QueryTypes.SELECT, plain: true, raw: true 
         })
           .then((subcentros) => res.status(200).send(subcentros))

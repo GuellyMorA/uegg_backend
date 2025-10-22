@@ -212,7 +212,7 @@ router.get('/ueggPcpaComisionTipo/:id',                  ueggPcpaComisionTipoCon
 
 router.get('/ueggPcpaConstruccion',                      ueggPcpaConstruccionController.list);
 //router.get('/ueggPcpaConstruccion/:id',                  ueggPcpaConstruccionController.getByUnidadEducativa);
-router.get('/ueggPcpaConstruccion/:id',                  ueggPcpaConstruccionController.getById);      
+// rbc router.get('/ueggPcpaConstruccion/:id',                  ueggPcpaConstruccionController.getById);      
 router.get('/ueggPcpaConstruccion/ci/:ci/idUE/:idUE',    ueggPcpaConstruccionController.getByCiAndUe); 
 
 router.get('/ueggPcpaIndicadoresEjecucion/:id',          ueggPcpaIndicadoresEjecucionController.getById);                                                                        
@@ -276,7 +276,8 @@ router.put('/ueggPcpaActividadesPromocionDel/:id',       ueggPcpaActividadesProm
 
 router.put('/ueggPcpaActividadesTipo/:id',               ueggPcpaActividadesTipoController.update);                                                                        
 router.put('/ueggPcpaActividadesTipoDet/:id',            ueggPcpaActividadesTipoDetController.update);                                                                        
-router.put('/ueggPcpaComisionTipo/:id',                  ueggPcpaComisionTipoController.update);                                                                        
+router.put('/ueggPcpaComisionTipo/:id',                  ueggPcpaComisionTipoController.update);   
+
 router.put('/ueggPcpaConstruccion/:id',                  ueggPcpaConstruccionController.update);                                                                        
 router.put('/ueggPcpaConstruccionDel/:id',               ueggPcpaConstruccionDelController.deleteLogico); 
 
