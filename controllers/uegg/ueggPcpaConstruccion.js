@@ -77,16 +77,16 @@ module.exports = {
                 message: "ueggPcpaConstruccion Not Found"
               });
             }
-        return ueggPcpaConstruccion
-              .update({
-                id_pcpa_unidad_educativa: req.body.id_pcpa_unidad_educativa ||  ueggPcpaConstruccion.id_pcpa_unidad_educativa  ,
-                fecha_registro: req.body.fecha_registro  ||  ueggPcpaConstruccion.fecha_registro  ,
-                check_diagnostico_pcpa: req.body.check_diagnostico_pcpa  ||  ueggPcpaConstruccion.check_diagnostico_pcpa  ,
-                fecha_aprobacion: req.body.fecha_aprobacion  ||  ueggPcpaConstruccion.fecha_aprobacion  ,
-                 estado: req.body.estado || ueggPcpaConstruccion.estado,
-                usu_mod: req.body.usu_cre ,
-                fec_mod:  new Date() //req.body.fec_mod
-              })
+            return ueggPcpaConstruccion
+            .update({
+             id_pcpa_unidad_educativa: req.body.id_pcpa_unidad_educativa ?? ueggPcpaConstruccion.id_pcpa_unidad_educativa,
+            fecha_registro: req.body.fecha_registro ?? ueggPcpaConstruccion.fecha_registro,
+            check_diagnostico_pcpa: req.body.check_diagnostico_pcpa ?? ueggPcpaConstruccion.check_diagnostico_pcpa,
+            fecha_aprobacion: req.body.fecha_aprobacion ?? ueggPcpaConstruccion.fecha_aprobacion,
+            estado: req.body.estado ?? ueggPcpaConstruccion.estado,
+            usu_mod: req.body.usu_cre ?? ueggPcpaConstruccion.usu_mod, // Corregido: Asumiendo que quieres un fallback
+            fec_mod: new Date()
+            })
               .then(() =>{  
                  console.log(' *************SI UPDATE OK');
                  res.status(200).send(ueggPcpaConstruccion)   })
