@@ -108,7 +108,7 @@ async listActividadesPromocion(req, res) {
     },
 
     add(req, res) {
-          console.log(UeggPcpaActividadesPromocion);
+                console.log('req.params.id :' , req.params.id);
         return UeggPcpaActividadesPromocion.create({
             id_pcpa_construccion: req.body.id_pcpa_construccion,
             id_pcpa_actividades_tipo: req.body.id_pcpa_actividades_tipo,
@@ -138,17 +138,17 @@ async listActividadesPromocion(req, res) {
             }
              return ueggPcpaActividadesPromocion
              .update({
-               id_pcpa_construccion: req.body.id_pcpa_construccion ?? ueggPcpaActividadesPromocion.id_pcpa_construccion,
-               id_pcpa_actividades_tipo: req.body.id_pcpa_actividades_tipo ?? ueggPcpaActividadesPromocion.id_pcpa_actividades_tipo,
+              id_pcpa_construccion: req.body.id_pcpa_construccion ?? ueggPcpaActividadesPromocion.id_pcpa_construccion,
+              id_pcpa_actividades_tipo: req.body.id_pcpa_actividades_tipo ?? ueggPcpaActividadesPromocion.id_pcpa_actividades_tipo,
             
-               nivel: req.body.nivel ?? ueggPcpaActividadesPromocion.nivel,
-               fec_aprobacion: req.body.fec_aprobacion ?? ueggPcpaActividadesPromocion.fec_aprobacion,
-               tiempo_vigencia: req.body.tiempo_vigencia ?? ueggPcpaActividadesPromocion.tiempo_vigencia,
-               declaracion_jurada: req.body.declaracion_jurada ?? ueggPcpaActividadesPromocion.declaracion_jurada,
+              nivel: req.body.nivel ?? ueggPcpaActividadesPromocion.nivel,
+              fec_aprobacion: req.body.fec_aprobacion ?? ueggPcpaActividadesPromocion.fec_aprobacion,
+              tiempo_vigencia: req.body.tiempo_vigencia ?? ueggPcpaActividadesPromocion.tiempo_vigencia,
+              declaracion_jurada: req.body.declaracion_jurada ?? ueggPcpaActividadesPromocion.declaracion_jurada,
 // ^^^ Esta línea es especialmente importante si 'declaracion_jurada' puede ser 'false'
-               estado: req.body.estado ?? ueggPcpaActividadesPromocion.estado,
-               usu_mod: req.body.usu_cre ?? ueggPcpaActividadesPromocion.usu_mod, // Corregido: Añadido fallback
-               fec_mod: new Date() 
+              estado: req.body.estado ?? ueggPcpaActividadesPromocion.estado,
+              usu_mod: req.body.usu_cre ?? ueggPcpaActividadesPromocion.usu_mod, // Corregido: Añadido fallback
+              fec_mod: new Date() 
              })
               .then(() =>{  
                  console.log(' *************SI UPDATE OK');
