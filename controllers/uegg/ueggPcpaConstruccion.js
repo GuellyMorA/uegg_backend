@@ -81,8 +81,9 @@ module.exports = {
             .update({
              id_pcpa_unidad_educativa: req.body.id_pcpa_unidad_educativa ?? ueggPcpaConstruccion.id_pcpa_unidad_educativa,
             fecha_registro: req.body.fecha_registro ?? ueggPcpaConstruccion.fecha_registro,
-            check_diagnostico_pcpa: req.body.check_diagnostico_pcpa ?? ueggPcpaConstruccion.check_diagnostico_pcpa,
+            check_diagnostico_pcpa: req.body.check_diagnostico_pcpa , //?? ueggPcpaConstruccion.check_diagnostico_pcpa,
             fecha_aprobacion: req.body.fecha_aprobacion ?? ueggPcpaConstruccion.fecha_aprobacion,
+           vigencia_aprobacion: req.body.vigencia_aprobacion  ?? ueggPcpaConstruccion.vigencia_aprobacion,
             estado: req.body.estado ?? ueggPcpaConstruccion.estado,
             usu_mod: req.body.usu_cre ?? ueggPcpaConstruccion.usu_mod, // Corregido: Asumiendo que quieres un fallback
             fec_mod: new Date()
