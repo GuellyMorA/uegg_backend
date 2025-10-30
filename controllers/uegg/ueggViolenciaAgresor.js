@@ -56,7 +56,7 @@ module.exports = {
     
       update(req, res) {
         console.log(UeggViolenciaAgresor);
-        return UeggViolenciaAgresor.findByPk(req.params.Id, {})
+        return UeggViolenciaAgresor.findByPk(req.params.id, {})
           .then(UeggViolenciaAgresor => {
             if (!UeggViolenciaAgresor) {
               return res.status(404).send({
@@ -97,7 +97,7 @@ module.exports = {
       },
     
       delete(req, res) {
-        return UeggViolenciaAgresor.findByPk(req.params.Id)
+        return UeggViolenciaAgresor.findByPk(req.params.id)
           .then(UeggViolenciaAgresor => {
             if (!UeggViolenciaAgresor) {
               return res.status(400).send({

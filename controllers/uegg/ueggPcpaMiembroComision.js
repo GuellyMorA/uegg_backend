@@ -26,7 +26,8 @@ module.exports = {
           join uegg_pcpa_miembro_comision upmc  on upmc.id_pcpa_construccion = upcon.id
           join uegg_pcpa_miembro_tipo upmt      on upmt.id = upmc.id_pcpa_miembro_tipo 
           join uegg_pcpa_comision_tipo upct     on upct.id = upmc.id_pcpa_comision_tipo      
-        WHERE upue.cod_ue = ${req.params.id} and upue.estado = 'ACTIVO' and upmc.estado = 'ACTIVO'  order by id_pcpa_comision_tipo ASC,  id_miembro_tipo ASC`, {
+        WHERE upue.cod_ue = ${req.params.id} and upue.estado in ('ACTIVO','MODIFICADO') and upmc.estado in ('ACTIVO','MODIFICADO')
+          order by id_pcpa_comision_tipo ASC,  id_miembro_tipo ASC`, {
           type: sequelize.QueryTypes.SELECT, plain: false, raw: true //  ||  ' ' || upmc.apellidos_miembro 
         })
           .then((subcentros) => res.status(200).send(subcentros))
@@ -71,7 +72,7 @@ module.exports = {
       },
     
     update(req, res) {
-        console.log(UeggPcpaMiembroComision);
+         console.log('req.params.id :' , req.params.id);
         return UeggPcpaMiembroComision.findByPk(req.params.id, {})
           .then(ueggPcpaMiembroComision => {
             if (!ueggPcpaMiembroComision) {
@@ -138,7 +139,7 @@ module.exports = {
 
 
       delete(req, res) {
-        return UeggPcpaMiembroComision.findByPk(req.params.Id)
+        return UeggPcpaMiembroComision.findByPk(req.params.id)
           .then(ueggPcpaMiembroComision => {
             if (!ueggPcpaMiembroComision) {
               return res.status(400).send({

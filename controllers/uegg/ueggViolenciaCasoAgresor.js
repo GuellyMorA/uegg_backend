@@ -43,7 +43,7 @@ module.exports = {
     
       update(req, res) {
         console.log(UeggViolenciaCasoAgresor);
-        return UeggViolenciaCasoAgresor.findByPk(req.params.Id, {})
+        return UeggViolenciaCasoAgresor.findByPk(req.params.id, {})
           .then(UeggViolenciaCasoAgresor => {
             if (!UeggViolenciaCasoAgresor) {
               return res.status(404).send({

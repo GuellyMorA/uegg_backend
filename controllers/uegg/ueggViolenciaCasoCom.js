@@ -87,7 +87,7 @@ add(req, res) {
 
       update(req, res) {
         console.log(UeggViolenciaCasoCom);
-        return UeggViolenciaCasoCom.findByPk(req.params.Id, {})
+        return UeggViolenciaCasoCom.findByPk(req.params.id, {})
           .then(UeggViolenciaCasoCom => {
             if (!UeggViolenciaCasoCom) {
               return res.status(404).send({
@@ -128,7 +128,7 @@ add(req, res) {
       },
     
       delete(req, res) {
-        return UeggViolenciaCasoCom.findByPk(req.params.Id)
+        return UeggViolenciaCasoCom.findByPk(req.params.id)
           .then(UeggViolenciaCasoCom => {
             if (!UeggViolenciaCasoCom) {
               return res.status(400).send({

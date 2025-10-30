@@ -43,7 +43,7 @@ module.exports = {
     
     update(req, res) {
         console.log(UeggPcpaIndicadoresEjecucion);
-        return UeggPcpaIndicadoresEjecucion.findByPk(req.params.Id, {})
+        return UeggPcpaIndicadoresEjecucion.findByPk(req.params.id, {})
           .then(ueggPcpaIndicadoresEjecucion => {
             if (!ueggPcpaIndicadoresEjecucion) {
               return res.status(404).send({

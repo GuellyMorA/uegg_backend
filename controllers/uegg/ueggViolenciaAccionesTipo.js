@@ -67,7 +67,7 @@ module.exports = {
       },
     
       delete(req, res) {
-        return UeggViolenciaAccionesTipo.findByPk(req.params.Id)
+        return UeggViolenciaAccionesTipo.findByPk(req.params.id)
           .then(UeggViolenciaAccionesTipo => {
             if (!UeggViolenciaAccionesTipo) {
               return res.status(400).send({

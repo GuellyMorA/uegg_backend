@@ -63,7 +63,7 @@ module.exports = {
     
     update(req, res) {
         console.log(UeggEmbEstudianteDerecho);
-        return UeggEmbEstudianteDerecho.findByPk(req.params.Id, {})
+        return UeggEmbEstudianteDerecho.findByPk(req.params.id, {})
           .then(ueggEmbEstudianteDerecho => {
             if (!ueggEmbEstudianteDerecho) {
               return res.status(404).send({
@@ -115,7 +115,7 @@ module.exports = {
       },
     
     delete(req, res) {
-        return UeggEmbEstudianteDerecho.findByPk(req.params.Id)
+        return UeggEmbEstudianteDerecho.findByPk(req.params.id)
           .then(ueggEmbEstudianteDerecho => {
             if (!ueggEmbEstudianteDerecho) {
               return res.status(400).send({

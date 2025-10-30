@@ -118,9 +118,9 @@ async listActividadesPromocion(req, res) {
             tiempo_vigencia: req.body.tiempo_vigencia,
             declaracion_jurada: req.body.declaracion_jurada,
             
-            estado: 'ACTIVO' ,
-            usu_cre: req.body.usu_cre ,
-            fec_cre: req.body.fec_cre 
+            estado: req.body.estado ,
+            usu_cre: req.body.usu_cre ,//   new Date('2013-03-10T02:00:00Z').toString()
+            fec_cre: req.body.fec_cre  //  new Date().toISOString() 
           
         })
           .then(ueggPcpaActividadesPromocion => res.status(201).send(ueggPcpaActividadesPromocion))
@@ -163,7 +163,7 @@ async listActividadesPromocion(req, res) {
       },
     
       delete(req, res) {
-        return UeggPcpaActividadesPromocion.findByPk(req.params.Id)
+        return UeggPcpaActividadesPromocion.findByPk(req.params.id)
           .then(ueggPcpaActividadesPromocion => {
             if (!ueggPcpaActividadesPromocion) {
               return res.status(400).send({

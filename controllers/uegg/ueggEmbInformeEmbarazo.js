@@ -42,7 +42,7 @@ module.exports = {
     
       update(req, res) {
         console.log(UeggEmbInformeEmbarazo);
-        return UeggEmbInformeEmbarazo.findByPk(req.params.Id, {})
+        return UeggEmbInformeEmbarazo.findByPk(req.params.id, {})
           .then(ueggEmbInformeEmbarazo => {
             if (!ueggEmbInformeEmbarazo) {
               return res.status(404).send({

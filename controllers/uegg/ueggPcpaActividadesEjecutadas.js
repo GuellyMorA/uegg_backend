@@ -19,7 +19,8 @@ module.exports = {
                 join uegg_pcpa_actividades_tipo  upat  on upae.id_pcpa_actividades_tipo = upat.id    
                 join uegg_pcpa_construccion upcon on upae.id_pcpa_construccion = upcon.id  
                       join uegg_pcpa_unidad_educativa upue   on upcon.id_pcpa_unidad_educativa = upue.id 
-            WHERE upue.cod_ue = ${req.params.id} and upue.estado = 'ACTIVO' and upae.estado = 'ACTIVO' order by   upae.id_pcpa_actividades_tipo asc, id_actividades_ejecutadas ASC`,
+            WHERE upue.cod_ue = ${req.params.id} and upue.estado in ('ACTIVO','MODIFICADO') and upae.estado in ('ACTIVO','MODIFICADO')
+             order by   upae.id_pcpa_actividades_tipo asc, id_actividades_ejecutadas ASC`,
                       
         {
           type: sequelize.QueryTypes.SELECT, plain: false, raw: true 
@@ -56,9 +57,9 @@ module.exports = {
             desc_actividad: req.body.desc_actividad,
             fec_actividad: req.body.fec_actividad,
 
-            estado: 'ACTIVO' ,
-            usu_cre: req.body.usu_cre ,
-            fec_cre: req.body.fec_cre 
+            estado: req.body.estado ,
+            usu_cre: req.body.usu_cre ,//   new Date('2013-03-10T02:00:00Z').toString()
+            fec_cre: req.body.fec_cre  //  new Date().toISOString() 
           
         })
           .then(ueggPcpaActividadesEjecutadas => res.status(201).send(ueggPcpaActividadesEjecutadas))
@@ -66,8 +67,8 @@ module.exports = {
       },
     
       update(req, res) {
-        console.log(UeggPcpaActividadesEjecutadas);
-        return UeggPcpaActividadesEjecutadas.findByPk(req.params.Id, {})
+         console.log('req.params.id :' , req.params.id);
+        return UeggPcpaActividadesEjecutadas.findByPk(req.params.id, {})
           .then(ueggPcpaActividadesEjecutadas => {
             if (!ueggPcpaActividadesEjecutadas) {
               return res.status(404).send({
@@ -82,9 +83,9 @@ module.exports = {
                 desc_actividad: req.body.desc_actividad || ueggPcpaActividadesEjecutadas.desc_actividad,
                 fec_actividad: req.body.fec_actividad || ueggPcpaActividadesEjecutadas.fec_actividad,
 
-                estado: 'MODIFICADO',  
-                usu_mod: req.body.usu_mod ,
-                fec_mod: req.body.fec_mod
+            estado: req.body.estado ?? ueggPcpaActividadesEjecutadas.estado,
+            usu_mod: req.body.usu_cre ?? ueggPcpaActividadesEjecutadas.usu_mod, // Corregido: Asumiendo que quieres un fallback
+            fec_mod: new Date()
               })
               .then(() =>{  
                  console.log(' *************SI UPDATE OK');
@@ -99,7 +100,7 @@ module.exports = {
       },
     
       delete(req, res) {
-        return UeggPcpaActividadesEjecutadas.findByPk(req.params.Id)
+        return UeggPcpaActividadesEjecutadas.findByPk(req.params.id)
           .then(ueggPcpaActividadesEjecutadas => {
             if (!ueggPcpaActividadesEjecutadas) {
               return res.status(400).send({

@@ -45,9 +45,9 @@ module.exports = {
             check_estudiante_casada: req.body.check_estudiante_casada,
             check_estudiante_conviviente: req.body.check_estudiante_conviviente,
      
-            estado: 'ACTIVO' ,
-            usu_cre: req.body.usu_cre ,
-            fec_cre: req.body.fec_cre 
+            estado: req.body.estado ,
+            usu_cre: req.body.usu_cre ,//   new Date('2013-03-10T02:00:00Z').toString()
+            fec_cre: req.body.fec_cre  //  new Date().toISOString() 
           
         })
           .then(ueggEmbEstudianteEmbarazo => res.status(201).send(ueggEmbEstudianteEmbarazo))
@@ -56,7 +56,7 @@ module.exports = {
     
       update(req, res) {
         console.log(UeggEmbEstudianteEmbarazo);
-        return UeggEmbEstudianteEmbarazo.findByPk(req.params.Id, {})
+        return UeggEmbEstudianteEmbarazo.findByPk(req.params.id, {})
           .then(ueggEmbEstudianteEmbarazo => {
             if (!ueggEmbEstudianteEmbarazo) {
               return res.status(404).send({
@@ -84,9 +84,9 @@ module.exports = {
                 check_estudiante_casada: req.body.check_estudiante_casada || ueggEmbEstudianteEmbarazo.check_estudiante_casada,
                 check_estudiante_conviviente: req.body.check_estudiante_conviviente || ueggEmbEstudianteEmbarazo.check_estudiante_conviviente,
                         
-                estado: 'MODIFICADO',  
-                usu_mod: req.body.usu_mod ,
-                fec_mod: req.body.fec_mod
+            estado: req.body.estado ?? ueggEmbEstudianteEmbarazo.estado,
+            usu_mod: req.body.usu_cre ?? ueggEmbEstudianteEmbarazo.usu_mod, // Corregido: Asumiendo que quieres un fallback
+            fec_mod: new Date()
               })
               .then(() =>{  
                  console.log(' *************SI UPDATE OK');
