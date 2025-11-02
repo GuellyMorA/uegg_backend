@@ -27,7 +27,7 @@ module.exports = {
     },
 
     getByCiAndUe(req, res) {
-       console.log('req.params.idUE; ' ,req.params.idUE);  // nota.- username =ci
+       console.log('req.params.ci , req.params.idUE; ',req.params.ci ,req.params.idUE);  // nota.- username =ci
       return UeggPcpaConstruccion.findAll({
                 limit: 10,
              attributes: ['id','usu_cre', 'id_pcpa_unidad_educativa','vigencia_aprobacion','estado'],
@@ -50,6 +50,7 @@ module.exports = {
     },
         
     add(req, res) {
+         console.log('req: ', req.params);
         return UeggPcpaConstruccion.create({
             id_pcpa_unidad_educativa: req.body.id_pcpa_unidad_educativa ,
             fecha_registro: new Date(req.body.fecha_registro )  , //  new Date().toISOString()     new Date( req.body.fecha_registro  ).toString() ,
@@ -69,7 +70,7 @@ module.exports = {
 
 
     update(req, res) {
-        console.log(UeggPcpaConstruccion);
+      console.log(req.params.id); 
         return UeggPcpaConstruccion.findByPk(req.params.id, {})
           .then(ueggPcpaConstruccion => {
             if (!ueggPcpaConstruccion) {

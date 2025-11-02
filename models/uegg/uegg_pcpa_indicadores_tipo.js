@@ -1,17 +1,9 @@
 'use strict';
+//const sequelize = UeggPcpaIndicadoresTipo.sequelize;
 //autor: gma
 //date :07/03/2024
 
 
-	
-	   // convivencia pacifica
-
-// 3. EVALUACION  - Regitro violencia	
-	
-//  module.exports = (sequelize, DataTypes) => {  const   Persona = sequelize.define('pcpa_unidad_educativa (	
-//  module.exports = (sequelize, DataTypes) => {  const   Persona = sequelize.define('pcpa_module.exports = (sequelize, DataTypes) => {  const  ruccion (	
-//  module.exports = (sequelize, DataTypes) => {  const   Persona = sequelize.define('pcpa_indicadores_tipo (	
-	
 module.exports = (sequelize, DataTypes) => {	
     const   UeggPcpaIndicadoresTipo = sequelize.define('uegg_pcpa_indicadores_tipo', {	
         id: {

@@ -19,7 +19,7 @@ const ueggEmbEstudianteDerechosSegController    =  require('../controllers/uegg/
 const ueggEmbEstudianteEmbarazoController    =  require('../controllers/uegg/ueggEmbEstudianteEmbarazo');
 const ueggEmbInformeEmbarazoController    =  require('../controllers/uegg/ueggEmbInformeEmbarazo');
 const ueggEmbReporteEmbarazoTipoController    =  require('../controllers/uegg/ueggEmbReporteEmbarazoTipo');
-const ueggPcpaAcccionesEjecucionController    =  require('../controllers/uegg/ueggPcpaAcccionesEjecucion');
+const ueggPcpaAccionesEjecucionController    =  require('../controllers/uegg/ueggPcpaAccionesEjecucion');
 
 
 
@@ -89,7 +89,11 @@ router.get('/ueggEmbEstudianteEmbarazo',             ueggEmbEstudianteEmbarazoCo
 router.get('/ueggEmbInformeEmbarazo',                ueggEmbInformeEmbarazoController.list);                                                                        
 router.get('/ueggEmbReporteEmbarazoTipo',            ueggEmbReporteEmbarazoTipoController.list);    
 
-router.get('/ueggPcpaAcccionesEjecucion',            ueggPcpaAcccionesEjecucionController.list);                                                                        
+router.get('/ueggPcpaAccionesEjecucion',            ueggPcpaAccionesEjecucionController.list);     
+router.get('/ueggPcpaAccionesEjecucionList/:id',    ueggPcpaAccionesEjecucionController.listAccionesEjecucion);    
+
+
+
 router.get('/ueggPcpaActividadesEjecutadas',         ueggPcpaActividadesEjecutadasController.list);    
 router.get('/ueggPcpaActividadesEjecutadasList/:id', ueggPcpaActividadesEjecutadasController.listActividadesEjecutadas);    
 
@@ -98,9 +102,10 @@ router.get('/ueggPcpaActividadesEjecutadasList/:id', ueggPcpaActividadesEjecutad
 router.get('/ueggPcpaActividadesTipo',               ueggPcpaActividadesTipoController.list);                                                                        
 router.get('/ueggPcpaActividadesTipoDet',            ueggPcpaActividadesTipoDetController.list);                                                                        
 router.get('/ueggPcpaComisionTipo',                  ueggPcpaComisionTipoController.list);                                                                        
-                                                                     
-router.get('/ueggPcpaIndicadoresEjecucion',          ueggPcpaIndicadoresEjecucionController.list);                                                                        
+  
 router.get('/ueggPcpaIndicadoresTipo',               ueggPcpaIndicadoresTipoController.list);    
+router.get('/ueggPcpaIndicadoresEjecucion',          ueggPcpaIndicadoresEjecucionController.list);                                                                        
+router.get('/ueggPcpaIndicadoresEjecucionList/:id', ueggPcpaIndicadoresEjecucionController.listIndicadoresEjecucion);    
 
 
 
@@ -151,7 +156,7 @@ router.post('/ueggEmbEstudianteDerechosSeg',          ueggEmbEstudianteDerechosS
 router.post('/ueggEmbEstudianteEmbarazo',             ueggEmbEstudianteEmbarazoController.add);                                                                               
 router.post('/ueggEmbInformeEmbarazo',                ueggEmbInformeEmbarazoController.add);                                                                        
 router.post('/ueggEmbReporteEmbarazoTipo',            ueggEmbReporteEmbarazoTipoController.add);                                                                        
-router.post('/ueggPcpaAcccionesEjecucion',            ueggPcpaAcccionesEjecucionController.add);                                                                        
+router.post('/ueggPcpaAccionesEjecucion',            ueggPcpaAccionesEjecucionController.add);                                                                        
 router.post('/ueggPcpaActividadesEjecutadas',         ueggPcpaActividadesEjecutadasController.add);    
                                                                     
 router.post('/ueggPcpaActividadesPromocion',          ueggPcpaActividadesPromocionController.add);                                                                        
@@ -198,7 +203,7 @@ router.get('/ueggEmbEstudianteDerechosSeg/:id',          ueggEmbEstudianteDerech
 router.get('/ueggEmbEstudianteEmbarazo/:id',             ueggEmbEstudianteEmbarazoController.getById);                                                                        
 router.get('/ueggEmbInformeEmbarazo/:id',                ueggEmbInformeEmbarazoController.getById);                                                                        
 router.get('/ueggEmbReporteEmbarazoTipo/:id',            ueggEmbReporteEmbarazoTipoController.getById);                                                                        
-router.get('/ueggPcpaAcccionesEjecucion/:id',            ueggPcpaAcccionesEjecucionController.getById);                                                                        
+router.get('/ueggPcpaAccionesEjecucion/:id',            ueggPcpaAccionesEjecucionController.getById);                                                                        
 router.get('/ueggPcpaActividadesEjecutadas/:id',         ueggPcpaActividadesEjecutadasController.getById);                                                                        
 router.get('/ueggPcpaActividadesPromocion/:id',          ueggPcpaActividadesPromocionController.getById);    
 router.get('/ueggPcpaActividadesPromocion',          ueggPcpaActividadesPromocionController.list);
@@ -262,7 +267,7 @@ router.put('/ueggEmbEstudianteDerechosSeg/:id',          ueggEmbEstudianteDerech
 router.put('/ueggEmbEstudianteEmbarazo/:id',             ueggEmbEstudianteEmbarazoController.update);                                                                        
 router.put('/ueggEmbInformeEmbarazo/:id',                ueggEmbInformeEmbarazoController.update);                                                                        
 router.put('/ueggEmbReporteEmbarazoTipo/:id',            ueggEmbReporteEmbarazoTipoController.update);                                                                        
-router.put('/ueggPcpaAcccionesEjecucion/:id',            ueggPcpaAcccionesEjecucionController.update);  
+router.put('/ueggPcpaAccionesEjecucion/:id',            ueggPcpaAccionesEjecucionController.update);  
 
 
 
@@ -325,7 +330,7 @@ router.delete('/ueggEmbEstudianteDerechosSeg/:id',          ueggEmbEstudianteDer
 router.delete('/ueggEmbEstudianteEmbarazo/:id',             ueggEmbEstudianteEmbarazoController.delete);                                                                        
 router.delete('/ueggEmbInformeEmbarazo/:id',                ueggEmbInformeEmbarazoController.delete);                                                                        
 router.delete('/ueggEmbReporteEmbarazoTipo/:id',            ueggEmbReporteEmbarazoTipoController.delete);                                                                        
-router.delete('/ueggPcpaAcccionesEjecucion/:id',            ueggPcpaAcccionesEjecucionController.delete);                                                                        
+router.delete('/ueggPcpaAccionesEjecucion/:id',            ueggPcpaAccionesEjecucionController.delete);                                                                        
 router.delete('/ueggPcpaActividadesEjecutadas/:id',         ueggPcpaActividadesEjecutadasController.delete);                                                                        
 router.delete('/ueggPcpaActividadesPromocion/:id',          ueggPcpaActividadesPromocionController.delete);                                                                        
 router.delete('/ueggPcpaActividadesTipo/:id',               ueggPcpaActividadesTipoController.delete);                                                                        

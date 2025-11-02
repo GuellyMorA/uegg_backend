@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
            autoIncrement: true,
            field: 'id'
        },
-       id_pcpa_indicadores_tipo: DataTypes.INTEGER,
+
        id_pcpa_construccion: DataTypes.INTEGER,	
-       cod_indicadores: DataTypes.STRING, // ej. 1 
-       desc_indicadores: DataTypes.STRING,// ej. Indicador 	
-       fec_ejecucion: DataTypes.DATE,	
+       cantidad_acciones_inicial: DataTypes.INTEGER,	
+       cantidad_acciones_final: DataTypes.INTEGER,	
+
        estado: DataTypes.STRING,	
        usu_cre: DataTypes.STRING,	
        usu_mod: DataTypes.STRING,	
