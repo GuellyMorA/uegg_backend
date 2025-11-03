@@ -125,7 +125,7 @@ list(req, res) {
                 longitud: req.body.longitud || ueggPcpaUnidadEducativa.longitud,
                 
                 estado: req.body.estado || ueggPcpaUnidadEducativa.estado,
-                usu_mod: req.body.usu_cre ,
+                usu_mod: req.body.usu_mod ,
                 fec_mod:  new Date() //req.body.fec_mod
               })
               .then(() =>{  

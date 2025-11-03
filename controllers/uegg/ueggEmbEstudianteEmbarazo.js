@@ -85,7 +85,7 @@ module.exports = {
                 check_estudiante_conviviente: req.body.check_estudiante_conviviente || ueggEmbEstudianteEmbarazo.check_estudiante_conviviente,
                         
             estado: req.body.estado ?? ueggEmbEstudianteEmbarazo.estado,
-            usu_mod: req.body.usu_cre ?? ueggEmbEstudianteEmbarazo.usu_mod, // Corregido: Asumiendo que quieres un fallback
+            usu_mod: req.body.usu_mod ?? ueggEmbEstudianteEmbarazo.usu_mod, // Corregido: Asumiendo que quieres un fallback
             fec_mod: new Date()
               })
               .then(() =>{  

@@ -91,7 +91,7 @@ module.exports = {
                 check_miembro_comision: req.body.check_miembro_comision || ueggPcpaMiembroComision.check_miembro_comision,
                 
                  estado: req.body.estado || ueggPcpaMiembroComision.estado,
-                 usu_mod: req.body.usu_cre ,
+                 usu_mod: req.body.usu_mod ,
                 fec_mod:  new Date() //req.body.fec_mod
               })
               .then(() =>{  

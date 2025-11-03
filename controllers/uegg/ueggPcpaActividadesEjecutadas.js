@@ -14,7 +14,7 @@ module.exports = {
       console.log('req', req.params);
    
       return sequelize.query(`
-      select upae.id as id_actividades_ejecutadas,upae.id_pcpa_construccion  , upat.id as id_pcpa_actividades_tipo,  upat.desc_actividad as desc_actividades_ejecutadas, upat.check_actividad_tipo, upae.fec_actividad  , upae.estado 
+      select upae.id as id_actividades_ejecutadas,upae.id_pcpa_construccion  , upat.id as id_pcpa_actividades_tipo,  upae.desc_actividad as desc_actividades_ejecutadas, upat.check_actividad_tipo, upae.fec_actividad  , upae.estado 
             from uegg_pcpa_actividades_ejecutadas upae    
                 join uegg_pcpa_actividades_tipo  upat  on upae.id_pcpa_actividades_tipo = upat.id    
                 join uegg_pcpa_construccion upcon on upae.id_pcpa_construccion = upcon.id  
@@ -84,7 +84,7 @@ module.exports = {
                 fec_actividad: req.body.fec_actividad || ueggPcpaActividadesEjecutadas.fec_actividad,
 
             estado: req.body.estado ?? ueggPcpaActividadesEjecutadas.estado,
-            usu_mod: req.body.usu_cre ?? ueggPcpaActividadesEjecutadas.usu_mod, // Corregido: Asumiendo que quieres un fallback
+            usu_mod: req.body.usu_mod ?? ueggPcpaActividadesEjecutadas.usu_mod, // Corregido: Asumiendo que quieres un fallback
             fec_mod: new Date()
               })
               .then(() =>{  

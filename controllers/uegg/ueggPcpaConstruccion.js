@@ -86,7 +86,7 @@ module.exports = {
             fecha_aprobacion: req.body.fecha_aprobacion ?? ueggPcpaConstruccion.fecha_aprobacion,
            vigencia_aprobacion: req.body.vigencia_aprobacion  ?? ueggPcpaConstruccion.vigencia_aprobacion,
             estado: req.body.estado ?? ueggPcpaConstruccion.estado,
-            usu_mod: req.body.usu_cre ?? ueggPcpaConstruccion.usu_mod, // Corregido: Asumiendo que quieres un fallback
+            usu_mod: req.body.usu_mod ?? ueggPcpaConstruccion.usu_mod, // Corregido: Asumiendo que quieres un fallback
             fec_mod: new Date()
             })
               .then(() =>{  

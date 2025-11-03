@@ -54,7 +54,7 @@ update(req, res) {
             desc_comision_tipo: req.body.desc_comision_tipo  ||  ueggPcpaComisionTipo.desc_comision_tipo  ,
   
                 estado: req.body.estado || ueggPcpaComisionTipo.estado,
-                usu_mod: req.body.usu_cre ,
+                usu_mod: req.body.usu_mod ,
             fec_mod: req.body.fec_mod
           })
           .then(() =>{  

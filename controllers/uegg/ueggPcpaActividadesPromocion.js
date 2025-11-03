@@ -147,7 +147,7 @@ async listActividadesPromocion(req, res) {
               declaracion_jurada: req.body.declaracion_jurada ?? ueggPcpaActividadesPromocion.declaracion_jurada,
 // ^^^ Esta línea es especialmente importante si 'declaracion_jurada' puede ser 'false'
               estado: req.body.estado ?? ueggPcpaActividadesPromocion.estado,
-              usu_mod: req.body.usu_cre ?? ueggPcpaActividadesPromocion.usu_mod, // Corregido: Añadido fallback
+              usu_mod: req.body.usu_mod ?? ueggPcpaActividadesPromocion.usu_mod, // Corregido: Añadido fallback
               fec_mod: new Date() 
              })
               .then(() =>{  

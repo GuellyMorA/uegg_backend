@@ -78,7 +78,7 @@ module.exports = {
                 cantidad_acciones_inicial: req.body.cantidad_acciones_inicial || ueggPcpaAccionesEjecucion.cantidad_acciones_inicial,
                 cantidad_acciones_final: req.body.cantidad_acciones_final || ueggPcpaAccionesEjecucion.cantidad_acciones_final,
                 estado: req.body.estado ?? ueggPcpaAccionesEjecucion.estado,
-                usu_mod: req.body.usu_cre ?? ueggPcpaAccionesEjecucion.usu_mod, // Corregido: Asumiendo que quieres un fallback
+                usu_mod: req.body.usu_mod ?? ueggPcpaAccionesEjecucion.usu_mod, // Corregido: Asumiendo que quieres un fallback
                 fec_mod: new Date()
               })
               .then(() =>{  
