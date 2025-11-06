@@ -48,7 +48,61 @@ module.exports = {
           });
 
     },
-        
+
+    
+    getByCiAndCodSieVigencia(req, res) {
+        console.log('req.params.ci:', req.params.ci);
+        console.log('req.params.codSie:', req.params.codSie);
+
+        return ueggPcpaUnidadEducativa.findAll({
+          limit: 10,
+          attributes: [
+            'id',
+            'usu_cre',
+            'cod_sie',
+            'nombres_director',
+            'desc_departamento',
+            'estado'
+          ],
+          where: {
+            usu_cre: req.params.ci,
+            cod_sie: req.params.codSie,
+            estado: {
+              [Op.in]: ['ACTIVO', 'MODIFICADO']
+            }
+          },
+          include: [
+            {
+              model: ueggPcpaConstruccion,
+              as: 'construcciones',
+              attributes: ['id', 'vigencia_aprobacion', 'fec_cre', 'estado'],
+              required: true, // INNER JOIN
+              where: {
+                estado: {
+                  [Op.in]: ['ACTIVO', 'MODIFICADO']
+                },
+                // 👇 Filtro de vigencia (PostgreSQL)
+                [Op.and]: [
+                  Sequelize.where(
+                    Sequelize.literal(`(fec_cre + (vigencia_aprobacion || ' years')::interval)`),
+                    { [Op.gte]: Sequelize.literal('NOW()') }
+                  )
+                ]
+              }
+            }
+          ]
+        })
+          .then(ueggPcpaUnidadEducativa => {
+            console.log('✅ Resultado con JOIN y filtro de vigencia (PostgreSQL):', ueggPcpaUnidadEducativa);
+            res.status(200).send(ueggPcpaUnidadEducativa);
+          })
+          .catch(error => {
+            console.error('❌ Error al obtener datos:', error);
+            res.status(400).send(error);
+          });
+    },
+
+
     add(req, res) {
          console.log('req: ', req.params);
         return UeggPcpaConstruccion.create({

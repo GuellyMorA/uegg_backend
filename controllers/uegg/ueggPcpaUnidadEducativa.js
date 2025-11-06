@@ -54,7 +54,8 @@ list(req, res) {
           });
 
     },
-            
+     
+    
     getByCodSie(req, res) {
        console.log(req.params.codSie);  
       return ueggPcpaUnidadEducativa.findAll({
