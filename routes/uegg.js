@@ -200,16 +200,19 @@ router.post('/ueggViolenciaVictima',                  ueggViolenciaVictimaContro
 
 router.get('/ueggEmbEstudianteDerechos/:id',             ueggEmbEstudianteDerechosController.getById);                                                                        
 router.get('/ueggEmbEstudianteDerechosSeg/:id',          ueggEmbEstudianteDerechosSegController.getById);                                                                        
-router.get('/ueggEmbEstudianteEmbarazo/:id',             ueggEmbEstudianteEmbarazoController.getById);                                                                        
-router.get('/ueggEmbInformeEmbarazo/:id',                ueggEmbInformeEmbarazoController.getById);                                                                        
-router.get('/ueggEmbReporteEmbarazoTipo/:id',            ueggEmbReporteEmbarazoTipoController.getById);                                                                        
+router.get('/ueggEmbEstudianteEmbarazo/:id',             ueggEmbEstudianteEmbarazoController.getById);      
+router.get('/ueggEmbEstudianteEmbarazoByCodRude/:id',    ueggEmbEstudianteEmbarazoController.getByCodRude); 
+
+router.get('/ueggEmbInformeEmbarazo/:id',                ueggEmbInformeEmbarazoController.getById);    
+router.get('/ueggEmbInformeEmbarazoByCodSie/:id',            ueggEmbInformeEmbarazoController.getByCodSie);  
+
+router.get('/ueggEmbReporteEmbarazoTipo/:id',            ueggEmbReporteEmbarazoTipoController.getById);  
+
 router.get('/ueggPcpaAccionesEjecucion/:id',            ueggPcpaAccionesEjecucionController.getById);                                                                        
 router.get('/ueggPcpaActividadesEjecutadas/:id',         ueggPcpaActividadesEjecutadasController.getById);                                                                        
 router.get('/ueggPcpaActividadesPromocion/:id',          ueggPcpaActividadesPromocionController.getById);    
 router.get('/ueggPcpaActividadesPromocion',          ueggPcpaActividadesPromocionController.list);
 router.get('/ueggPcpaActividadesPromocionList/:id',  ueggPcpaActividadesPromocionController.listActividadesPromocion);   
-
-
 
 router.get('/ueggPcpaActividadesTipo/:id',               ueggPcpaActividadesTipoController.getById);                                                                        
 router.get('/ueggPcpaActividadesTipoDet/:id',            ueggPcpaActividadesTipoDetController.getById);                                                                        
@@ -264,7 +267,11 @@ router.get('/ueggViolenciaVictima/:id',                  ueggViolenciaVictimaCon
 
 router.put('/ueggEmbEstudianteDerechos/:id',             ueggEmbEstudianteDerechosController.update);                                                                        
 router.put('/ueggEmbEstudianteDerechosSeg/:id',          ueggEmbEstudianteDerechosSegController.update);                                                                        
-router.put('/ueggEmbEstudianteEmbarazo/:id',             ueggEmbEstudianteEmbarazoController.update);                                                                        
+router.put('/ueggEmbEstudianteEmbarazo/:id',             ueggEmbEstudianteEmbarazoController.update);   
+                             
+
+
+
 router.put('/ueggEmbInformeEmbarazo/:id',                ueggEmbInformeEmbarazoController.update);                                                                        
 router.put('/ueggEmbReporteEmbarazoTipo/:id',            ueggEmbReporteEmbarazoTipoController.update);                                                                        
 router.put('/ueggPcpaAccionesEjecucion/:id',            ueggPcpaAccionesEjecucionController.update);  

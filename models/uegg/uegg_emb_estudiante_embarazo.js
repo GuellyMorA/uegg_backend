@@ -28,7 +28,15 @@ module.exports = (sequelize, DataTypes) => {
        nivel : DataTypes.STRING,	
        grado : DataTypes.STRING,	
        edad: DataTypes.INTEGER,
-       check_estudiante_discapacidad: DataTypes.BOOLEAN,	
+       check_estudiante_discapacidad: DataTypes.BOOLEAN,
+
+    dis_cognitiva:DataTypes.BOOLEAN,
+    dis_visual: DataTypes.BOOLEAN,
+    dis_auditiva:DataTypes.BOOLEAN,
+    dis_motriz: DataTypes.BOOLEAN,
+    dis_otro: DataTypes.BOOLEAN,
+ // Unión temprana
+
        check_estudiante_casada: DataTypes.BOOLEAN,	
        check_estudiante_conviviente: DataTypes.BOOLEAN,	
         

@@ -24,8 +24,35 @@ module.exports = {
             })
             .catch((error) => res.status(400).send(error));
     },
+  getByCodRude(req, res) {  //  cod_ue=cod_sie
+      console.log('req', req.params);
 
+      return sequelize.query(`
+      select uembest.id as id_emb_estudiante_embarazo,upcon.id as id_pcpa_construccion  ,  uembest.id_pcpa_unidad_educativa,
+      id_emb_informe_embarazo, cod_rude, cedula_identidad, complemento, fec_nacimiento, nombres_estudiante, apellido_pat_estudiante,
+      apellido_mat_estudiante, nivel, grado, edad, check_estudiante_discapacidad, dis_cognitiva, dis_visual, dis_auditiva, dis_motriz,
+      dis_otro, check_estudiante_casada, check_estudiante_conviviente, uembest.estado
+        from uegg_pcpa_construccion upcon                 
+        join uegg_pcpa_unidad_educativa upue         on   upcon.id_pcpa_unidad_educativa = upue.id  
+        join uegg_emb_estudiante_embarazo uembest    on uembest.id_pcpa_unidad_educativa = upue.id 
+     
+      WHERE uembest.cod_rude =  '${req.params.id}'  and upcon.estado in ('ACTIVO','MODIFICADO') and upue.estado in ('ACTIVO','MODIFICADO')  and uembest.estado in ('ACTIVO','MODIFICADO')
+          
+        `,               
+        {
+          type: sequelize.QueryTypes.SELECT, plain: false, raw: true 
+        })
+          .then((result) => {
+            console.log('✅ Resultado de getByCodSie:', result);
+            res.status(200).send(result);
+          })
+          .catch((error) => {
+            console.error('❌ Error en getByCodSie:', error);
+            res.status(400).send(error);
+          });
+        },
     add(req, res) {
+        console.log('req: ', req.params);
         return UeggEmbEstudianteEmbarazo.create({
             id_pcpa_unidad_educativa: req.body.id_pcpa_unidad_educativa,
             id_emb_informe_embarazo: req.body.id_emb_informe_embarazo,
@@ -41,9 +68,17 @@ module.exports = {
             nivel: req.body.nivel,
             grado: req.body.grado,
             edad: req.body.edad,
+
             check_estudiante_discapacidad: req.body.check_estudiante_discapacidad,
-            check_estudiante_casada: req.body.check_estudiante_casada,
-            check_estudiante_conviviente: req.body.check_estudiante_conviviente,
+            dis_cognitiva: req.body.dis_cognitiva ,
+            dis_visual: req.body.dis_visual ,
+            dis_auditiva: req.body.dis_auditiva ,
+            dis_motriz: req.body.dis_motriz ,
+            dis_otro: req.body.dis_otro ,
+        // Unión temprana
+            
+           // check_estudiante_casada: req.body.unionTemprana,
+            check_estudiante_conviviente: req.body.unionTemprana,
      
             estado: req.body.estado ,
             usu_cre: req.body.usu_cre ,//   new Date('2013-03-10T02:00:00Z').toString()
@@ -55,7 +90,7 @@ module.exports = {
       },
     
       update(req, res) {
-        console.log(UeggEmbEstudianteEmbarazo);
+          console.log('req: ', req.params);
         return UeggEmbEstudianteEmbarazo.findByPk(req.params.id, {})
           .then(ueggEmbEstudianteEmbarazo => {
             if (!ueggEmbEstudianteEmbarazo) {
@@ -81,8 +116,16 @@ module.exports = {
                 grado: req.body.grado || ueggEmbEstudianteEmbarazo.grado,
                 edad: req.body.edad || ueggEmbEstudianteEmbarazo.edad,
                 check_estudiante_discapacidad: req.body.check_estudiante_discapacidad || ueggEmbEstudianteEmbarazo.check_estudiante_discapacidad,
-                check_estudiante_casada: req.body.check_estudiante_casada || ueggEmbEstudianteEmbarazo.check_estudiante_casada,
-                check_estudiante_conviviente: req.body.check_estudiante_conviviente || ueggEmbEstudianteEmbarazo.check_estudiante_conviviente,
+   
+            dis_cognitiva: req.body.dis_cognitiva  || ueggEmbEstudianteEmbarazo.dis_cognitiva,
+            dis_visual: req.body.dis_visual  || ueggEmbEstudianteEmbarazo.dis_visual,
+            dis_auditiva: req.body.dis_auditiva || ueggEmbEstudianteEmbarazo.dis_auditiva ,
+            dis_motriz: req.body.dis_motriz || ueggEmbEstudianteEmbarazo.dis_motriz ,
+            dis_otro: req.body.dis_otro  || ueggEmbEstudianteEmbarazo.dis_otro,
+        // Unión temprana
+                
+               // check_estudiante_casada: req.body.unionTemprana || ueggEmbEstudianteEmbarazo.check_estudiante_casada,
+                check_estudiante_conviviente: req.body.unionTemprana || ueggEmbEstudianteEmbarazo.check_estudiante_conviviente,
                         
             estado: req.body.estado ?? ueggEmbEstudianteEmbarazo.estado,
             usu_mod: req.body.usu_mod ?? ueggEmbEstudianteEmbarazo.usu_mod, // Corregido: Asumiendo que quieres un fallback
