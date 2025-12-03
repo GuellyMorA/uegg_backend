@@ -199,7 +199,11 @@ router.post('/ueggViolenciaVictima',                  ueggViolenciaVictimaContro
 
 
 router.get('/ueggEmbEstudianteDerechos/:id',             ueggEmbEstudianteDerechosController.getById);                                                                        
+router.get('/ueggEmbEstudianteDerechosByCodRude/:id',    ueggEmbEstudianteDerechosController.getByCodRude); 
+
 router.get('/ueggEmbEstudianteDerechosSeg/:id',          ueggEmbEstudianteDerechosSegController.getById);                                                                        
+router.get('/ueggEmbEstudianteDerechosSegByCodRude/:id', ueggEmbEstudianteDerechosSegController.getByCodRude); 
+
 router.get('/ueggEmbEstudianteEmbarazo/:id',             ueggEmbEstudianteEmbarazoController.getById);      
 router.get('/ueggEmbEstudianteEmbarazoByCodRude/:id',    ueggEmbEstudianteEmbarazoController.getByCodRude); 
 

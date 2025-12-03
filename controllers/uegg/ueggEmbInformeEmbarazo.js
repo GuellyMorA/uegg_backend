@@ -25,7 +25,8 @@ module.exports = {
             })
             .catch((error) => res.status(400).send(error));
     },
-  getByCodSie(req, res) {  //  cod_ue=cod_sie
+
+    getByCodSie(req, res) {  //  cod_ue=cod_sie
       console.log('req', req.params);
 
       return sequelize.query(`
@@ -58,7 +59,7 @@ module.exports = {
             id_emb_reporte_embarazo_tipo_2: req.body.id_emb_reporte_embarazo_tipo_2, 
             id_emb_reporte_embarazo_tipo_3: req.body.id_emb_reporte_embarazo_tipo_3, 
     
-            estado: 'ACTIVO' ,
+             estado: req.body.estado ,
             usu_cre: req.body.usu_cre ,
             fec_cre: req.body.fec_cre 
           
@@ -83,7 +84,7 @@ module.exports = {
                 id_emb_reporte_embarazo_tipo_2: req.body.id_emb_reporte_embarazo_tipo_2 || ueggEmbInformeEmbarazo.id_emb_reporte_embarazo_tipo_2, 
                 id_emb_reporte_embarazo_tipo_3: req.body.id_emb_reporte_embarazo_tipo_3 || ueggEmbInformeEmbarazo.id_emb_reporte_embarazo_tipo_3, 
 
-                estado: 'MODIFICADO',  
+                estado: req.body.estado ?? ueggEmbInformeEmbarazo.estado,
                 usu_mod: req.body.usu_mod ,
                 fec_mod: req.body.fec_mod
               })
